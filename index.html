@@ -140,18 +140,8 @@
 
       if (isLand) {
         cell.classList.add("land");
-        cell.addEventListener("click", () => {
-          if (cell.classList.contains("clicked")) {
-            cell.classList.remove("clicked");
-            cell.classList.add("land");
-            cellStates[y][x] = 1;
-          } else {
-            cell.classList.remove("land");
-            cell.classList.add("clicked");
-            cellStates[y][x] = 2;
-          }
+         attachCellEvent(cell, x, y);
           saveHistory(); // ✅ 追加
-        });
       }
     }
   }
@@ -192,6 +182,29 @@
     startX = e.clientX;
     startY = e.clientY;
   });
+
+  function attachCellEvent(cell, x, y) {
+  const handler = () => {
+    if (cell.classList.contains("clicked")) {
+      cell.classList.remove("clicked");
+      cell.classList.add("land");
+      cellStates[y][x] = 1;
+    } else {
+      cell.classList.remove("land");
+      cell.classList.add("clicked");
+      cellStates[y][x] = 2;
+    }
+    saveHistory(); // もしUndo対応している場合
+  };
+
+  // PC対応
+  cell.addEventListener("click", handler);
+  // スマホ対応
+  cell.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // ←スクロール誤作動防止（必要なら）
+    handler();
+  }, { passive: false });
+}
 
   // 履歴管理
   function saveHistory() {
@@ -285,3 +298,4 @@
 
 </body>
 </html>
+
