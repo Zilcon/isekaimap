@@ -1,0 +1,48 @@
+/* style.css */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#controls {
+  margin: 10px;
+}
+
+#mapWrapper {
+  width: 90vw;
+  height: 80vh;
+  border: 2px solid #444;
+  overflow: hidden;
+  background: white;
+  position: relative;
+}
+
+#map {
+  display: grid;
+  transform-origin: 0 0;
+  position: absolute;
+  top: 0; left: 0;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  background-color: #88ccff; /* 海 */
+  cursor: default;
+}
+
+.land {
+  background-color: #aaaaaa; /* 陸：灰色 */
+  cursor: pointer;
+}
+
+.clicked {
+  background-color: #ff5555 !important; /* クリック済み：赤 */
+  cursor: pointer;
+}
